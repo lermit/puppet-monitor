@@ -24,7 +24,7 @@ class monitor::params {
   # Nagios/Shinken specific
   $action_url = ''
   $active_checks_enabled = ''
-  $alias = ''
+  $host_alias = ''
   $check_command = ''
   $check_freshness = ''
   $check_interval = ''
