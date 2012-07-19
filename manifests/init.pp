@@ -98,7 +98,7 @@ class monitor (
   $action_url                   = params_lookup('action_url'),
   $active_checks_enabled        = params_lookup('active_checks_enabled'),
   $address                      = params_lookup('address'),
-  $alias                        = params_lookup('alias'),
+  $host_alias                   = params_lookup('host_alias'),
   $check_command                = params_lookup('check_command'),
   $check_freshness              = params_lookup('check_freshness'),
   $check_interval               = params_lookup('check_interval'),
@@ -156,261 +156,55 @@ class monitor (
   if ( $monitor_tool =~ /monit/) {
   }
 
-  if ( $monitor_tool =~ /nagios/ or
-    $monitor_tool =~ /shinken/) {
-
-    @@nagios_host { "${monitor::host_name}":
-      address   => "${monitor::address}",
-      host_name => "${monitor::host_name}",
-      use       => "${monitor::use}",
-    }
-
-    if "${monitor::action_url}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        action_url => "${monitor::action_url}",
-      }
-    }
-
-    if "${monitor::active_checks_enabled}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        active_checks_enabled => "${monitor::active_checks_enabled}",
-      }
-    }
-
-    if "${monitor::alias}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        alias => "${monitor::alias}",
-      }
-    }
-
-    if "${monitor::check_command}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        check_command => "${monitor::check_command}",
-      }
-    }
-
-    if "${monitor::check_freshness}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        check_freshness => "${monitor::check_freshness}",
-      }
-    }
-
-    if "${monitor::check_interval}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        check_freshness => "${monitor::check_freshness}",
-      }
-    }
-
-    if "${monitor::check_interval}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        check_interval => "${monitor::check_interval}",
-      }
-    }
-
-    if "${monitor::check_period}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        check_period => "${monitor::check_period}",
-      }
-    }
-
-    if "${monitor::contact_groups}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        contact_groups => "${monitor::contact_groups}",
-      }
-    }
-
-    if "${monitor::contacts}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        contacts => "${monitor::contacts}",
-      }
-    }
-
-    if "${monitor::display_name}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        display_name => "${monitor::display_name}",
-      }
-    }
-
-    if "${monitor::event_handler}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        event_handler => "${monitor::event_handler}",
-      }
-    }
-
-    if "${monitor::event_handler_enabled}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        event_handler_enabled => "${monitor::event_handler_enabled}",
-      }
-    }
-
-    if "${monitor::failure_prediction_enabled}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        failure_prediction_enabled => "${monitor::failure_prediction_enabled}",
-      }
-    }
-
-    if "${monitor::first_notification_delay}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        first_notification_delay => "${monitor::first_notification_delay}",
-      }
-    }
-
-    if "${monitor::flap_detection_enabled}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        flap_detection_enabled => "${monitor::flap_detection_enabled}",
-      }
-    }
-
-    if "${monitor::flap_detection_options}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        flap_detection_options => "${monitor::flap_detection_options}",
-      }
-    }
-
-    if "${monitor::freshness_threshold}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        freshness_threshold => "${monitor::freshness_threshold}",
-      }
-    }
-
-    if "${monitor::high_flap_threshold}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        high_flap_threshold => "${monitor::high_flap_threshold}",
-      }
-    }
-
-    if "${monitor::hostgroups}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        hostgroups => "${monitor::hostgroups}",
-      }
-    }
-
-    if "${monitor::icon_image}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        icon_image => "${monitor::icon_image}",
-      }
-    }
-
-    if "${monitor::icon_image_alt}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        icon_image_alt => "${monitor::icon_image_alt}",
-      }
-    }
-
-    if "${monitor::initial_state}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        initial_state => "${monitor::initial_state}",
-      }
-    }
-
-    if "${monitor::low_flap_threshold}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        low_flap_threshold=> "${monitor::low_flap_threshold}",
-      }
-    }
-
-    if "${monitor::max_check_attempts}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        max_check_attempts => "${monitor::max_check_attempts}",
-      }
-    }
-
-    if "${monitor::notes}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        notes => "${monitor::notes}",
-      }
-    }
-
-    if "${monitor::notes_url}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        notes_url => "${monitor::notes_url}",
-      }
-    }
-
-    if "${monitor::notification_interval}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        notification_interval => "${monitor::notification_interval}",
-      }
-    }
-
-    if "${monitor::notification_options}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        notification_options => "${monitor::notification_options}",
-      }
-    }
-
-    if "${monitor::notification_period}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        notification_period => "${monitor::notification_period}",
-      }
-    }
-
-    if "${monitor::notifications_enabled}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        notifications_enabled => "${monitor::notifications_enabled}",
-      }
-    }
-
-    if "${monitor::obsess_over_host}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        obsess_over_host => "${monitor::obsess_over_host}",
-      }
-    }
-
-    if "${monitor::parents}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        parents => "${monitor::parents}",
-      }
-    }
-
-    if "${monitor::passive_checks_enabled}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        passive_checks_enabled=> "${monitor::passive_checks_enabled}",
-      }
-    }
-
-    if "${monitor::process_perf_data}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        process_perf_data=> "${monitor::process_perf_data}",
-      }
-    }
-
-    if "${monitor::retain_nonstatus_information}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        retain_nonstatus_information =>
-          "${monitor::retain_nonstatus_information}",
-      }
-    }
-
-    if "${monitor::retain_status_information}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        retain_status_information => "${monitor::retain_status_information}",
-      }
-    }
-
-    if "${monitor::retry_interval}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        retry_interval => "${monitor::retry_interval}",
-      }
-    }
-
-    if "${monitor::stalking_options}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        stalking_options => "${monitor::stalking_options}",
-      }
-    }
-
-    if "${monitor::statusmap_image}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        statusmap_image => "${monitor::statusmap_image}",
-      }
-    }
-
-    if "${monitor::vrml_image}" != '' {
-      Nagios_host["${monitor::host_name}"] {
-        vrml_image => "${monitor::vrml_image}",
-      }
-    }
+  if ( $monitor_tool =~ /nagios/) {
   }
 
+  if ( $monitor_tool =~ /shinken/) {
+    shinken::host { "$name":
+      address                      => "${monitor::address}",
+      host_name                    => "${monitor::host_name}",
+      use                          => "${monitor::use}",
+      action_url                   => "${monitor::action_url}",
+      active_checks_enabled        => "${monitor::active_checks_enabled}",
+      alias                        => "${monitor::alias}",
+      check_command                => "${monitor::check_command}",
+      check_freshness              => "${monitor::check_freshness}",
+      check_freshness              => "${monitor::check_freshness}",
+      check_interval               => "${monitor::check_interval}",
+      check_period                 => "${monitor::check_period}",
+      contact_groups               => "${monitor::contact_groups}",
+      contacts                     => "${monitor::contacts}",
+      display_name                 => "${monitor::display_name}",
+      event_handler                => "${monitor::event_handler}",
+      event_handler_enabled        => "${monitor::event_handler_enabled}",
+      failure_prediction_enabled   => "${monitor::failure_prediction_enabled}",
+      first_notification_delay     => "${monitor::first_notification_delay}",
+      flap_detection_enabled       => "${monitor::flap_detection_enabled}",
+      flap_detection_options       => "${monitor::flap_detection_options}",
+      freshness_threshold          => "${monitor::freshness_threshold}",
+      high_flap_threshold          => "${monitor::high_flap_threshold}",
+      hostgroups                   => "${monitor::hostgroups}",
+      icon_image                   => "${monitor::icon_image}",
+      icon_image_alt               => "${monitor::icon_image_alt}",
+      initial_state                => "${monitor::initial_state}",
+      low_flap_threshold           => "${monitor::low_flap_threshold}",
+      max_check_attempts           => "${monitor::max_check_attempts}",
+      notes                        => "${monitor::notes}",
+      notes_url                    => "${monitor::notes_url}",
+      notification_interval        => "${monitor::notification_interval}",
+      notification_options         => "${monitor::notification_options}",
+      notification_period          => "${monitor::notification_period}",
+      notifications_enabled        => "${monitor::notifications_enabled}",
+      obsess_over_host             => "${monitor::obsess_over_host}",
+      parents                      => "${monitor::parents}",
+      passive_checks_enabled       => "${monitor::passive_checks_enabled}",
+      process_perf_data            => "${monitor::process_perf_data}",
+      retain_nonstatus_information => "${monitor::retain_nonstatus_information}",
+      retain_status_information    => "${monitor::retain_status_information}",
+      retry_interval               => "${monitor::retry_interval}",
+      stalking_options             => "${monitor::stalking_options}",
+      statusmap_image              => "${monitor::statusmap_image}",
+      vrml_image                   => "${monitor::vrml_image}",
+    }
+  }
 }
