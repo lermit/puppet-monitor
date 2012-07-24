@@ -169,7 +169,6 @@ class monitor (
       alias                        => "${monitor::alias}",
       check_command                => "${monitor::check_command}",
       check_freshness              => "${monitor::check_freshness}",
-      check_freshness              => "${monitor::check_freshness}",
       check_interval               => "${monitor::check_interval}",
       check_period                 => "${monitor::check_period}",
       contact_groups               => "${monitor::contact_groups}",
