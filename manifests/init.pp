@@ -166,7 +166,6 @@ class monitor (
       use                          => "${monitor::use}",
       action_url                   => "${monitor::action_url}",
       active_checks_enabled        => "${monitor::active_checks_enabled}",
-      alias                        => "${monitor::alias}",
       check_command                => "${monitor::check_command}",
       check_freshness              => "${monitor::check_freshness}",
       check_interval               => "${monitor::check_interval}",
