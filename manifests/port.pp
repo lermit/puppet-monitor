@@ -64,6 +64,22 @@ define monitor::port (
     }
   }
 
+  if ($tool =~ /shinken/) {
+    shinken::service { "$name":
+      ensure        => $ensure,
+      check_command => $protocol ? {
+        tcp => $checksource ? {
+          local   => "check_nrpe!check_port_tcp!${target}!${port}",
+          default => "check_tcp!${port}",
+        },
+        udp => $checksource ? {
+          local   => "check_nrpe!check_port_udp!${target}!${port}",
+          default => "check_udp!${port}",
+        },
+      }
+    }
+  }
+
   if ($tool =~ /puppi/) {
     puppi::check { "$name":
       enable   => $bool_enable,
