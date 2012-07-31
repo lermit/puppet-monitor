@@ -63,5 +63,6 @@ class monitor::params {
   $statusmap_image = ''
   $use = 'generic-host'
   $vrml_image = ''
+  $template = ''
 
 }

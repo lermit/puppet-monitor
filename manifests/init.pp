@@ -137,7 +137,8 @@ class monitor (
   $stalking_options             = params_lookup('stalking_options'),
   $statusmap_image              = params_lookup('statusmap_image'),
   $use                          = params_lookup('use'),
-  $vrml_image                   = params_lookup('vrml_image')
+  $vrml_image                   = params_lookup('vrml_image'),
+  $template			= params_lookup('monitor_template')
   ) inherits monitor::params {
 
   $bool_monitor=any2bool($monitor)
@@ -204,6 +205,11 @@ class monitor (
       stalking_options             => "${monitor::stalking_options}",
       statusmap_image              => "${monitor::statusmap_image}",
       vrml_image                   => "${monitor::vrml_image}",
+    }
+    if $monitor::template != '' {
+      Shinken::Host["$name"] {
+        template => $monitor::template,
+      }
     }
   }
 }
